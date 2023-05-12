@@ -35,7 +35,9 @@ class Store {
   setState(newState) {
     this.state = newState;
     // Вызываем всех слушателей
-    for (const listener of this.listeners) listener();
+    for (const listener of this.listeners) {
+      listener();
+    }
   }
 
   /**
@@ -68,8 +70,10 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          item.selected = !item.selected;
-        }
+          item.selected = !item.selected
+        } else {
+        item.selected = false;
+      }
         return item;
       })
     })
