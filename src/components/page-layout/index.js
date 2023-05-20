@@ -5,19 +5,19 @@ import './style.css';
 
 function PageLayout({children}) {
 
-    const cn = bem('PageLayout');
+  const cn = bem('PageLayout');
 
-    return (
-        <div className={cn()}>
-            <div className={cn('center')}>
-                {children}
-            </div>
-        </div>
-    );
+  return (
+    <div className={cn()}>
+      <div className={cn('center')}>
+        {children}
+      </div>
+    </div>
+  );
 }
 
 PageLayout.propTypes = {
-    children: PropTypes.node
+  children: PropTypes.node
 }
 
 export default React.memo(PageLayout);

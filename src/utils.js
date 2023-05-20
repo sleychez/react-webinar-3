@@ -8,12 +8,12 @@
  * @returns {*|string}
  */
 export function plural(value, variants = {}, locale = 'ru-RU') {
-    // Получаем фурму кодовой строкой: 'zero', 'one', 'two', 'few', 'many', 'other'
-    // В русском языке 3 формы: 'one', 'few', 'many', и 'other' для дробных
-    // В английском 2 формы: 'one', 'other'
-    const key = new Intl.PluralRules(locale).select(value);
-    // Возвращаем вариант по ключу, если он есть
-    return variants[key] || '';
+  // Получаем фурму кодовой строкой: 'zero', 'one', 'two', 'few', 'many', 'other'
+  // В русском языке 3 формы: 'one', 'few', 'many', и 'other' для дробных
+  // В английском 2 формы: 'one', 'other'
+  const key = new Intl.PluralRules(locale).select(value);
+  // Возвращаем вариант по ключу, если он есть
+  return variants[key] || '';
 }
 
 /**
@@ -22,12 +22,12 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
  * @returns {Number}
  */
 export const generateCode = (function (start = 0) {
-    return () => ++start;
+  return () => ++start;
 }());
 
 export function getTotalPrice(list) {
-    const totalPrice = list.reduce((acc, item) => {
-        return acc + item.price * item.count;
-    }, 0);
-    return totalPrice.toLocaleString();
+  const totalPrice = list.reduce((acc, item) => {
+    return acc + item.price * item.count;
+  }, 0);
+  return totalPrice.toLocaleString();
 }
