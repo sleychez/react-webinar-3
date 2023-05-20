@@ -20,24 +20,24 @@ function App({store}) {
   const {list, cartList, cartInfo} = store.getState();
 
   const callbacks = {
-    AddToCart: useCallback(
+    addToCart: useCallback(
       (code) => {
         store.addToCart(code);
       },
       [store]
     ),
 
-    DeleteCartItem: useCallback(
+    deleteCartItem: useCallback(
       (code) => {
         store.deleteCartItem(code);
       },
       [store]
     ),
-    ProductItem: useCallback(
+    renderProductItem: useCallback(
       (item) => (
         <Item
           item={item}
-          onClick={callbacks.AddToCart}
+          onClick={callbacks.addToCart}
           buttonText="Добавить"
         />
       ),
@@ -51,14 +51,14 @@ function App({store}) {
       <PageLayout>
         <Head title="Магазин"/>
         <Controls cartInfo={cartInfo} setIsModalOpen={setIsModalOpen}/>
-        <List list={list} element={callbacks.ProductItem}/>
+        <List list={list} element={callbacks.renderProductItem}/>
       </PageLayout>
       <ModalLayout isModalOpen={isModalOpen}>
         <Cart
           cartInfo={cartInfo}
           cartList={cartList}
           setIsModalOpen={setIsModalOpen}
-          DeleteCartItem={callbacks.DeleteCartItem}
+          DeleteCartItem={callbacks.deleteCartItem}
         />
       </ModalLayout>
     </>
