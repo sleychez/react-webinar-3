@@ -15,7 +15,7 @@ function BasketTool({sum, amount, onOpen}) {
           : `пусто`
         }
       </span>
-      <button onClick={onOpen}>Перейти</button>
+      <button className={cn('button')} onClick={onOpen}>Перейти</button>
     </div>
   );
 }

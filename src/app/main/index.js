@@ -6,6 +6,9 @@ import BasketTool from "../../components/basket-tool";
 import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
+import ControlLayout from "../../components/control-layout";
+import Pagination from "../../components/pagination";
+import CurrentPage from "../../components/currentPage";
 
 function Main() {
 
@@ -18,7 +21,9 @@ function Main() {
   const select = useSelector(state => ({
     list: state.catalog.list,
     amount: state.basket.amount,
-    sum: state.basket.sum
+    sum: state.basket.sum,
+    page: state.catalog.page,
+    totalPage: state.catalog.totalPage
   }));
 
   const callbacks = {
@@ -26,20 +31,34 @@ function Main() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    changePage: useCallback((page) => store.actions.catalog.load(page), [])
   }
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
+      return <Item item={item}
+                   onAdd={callbacks.addToBasket}
+                   link={`/card-product/${item._id}`}/>
     }, [callbacks.addToBasket]),
   };
 
   return (
     <PageLayout>
-      <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
-      <List list={select.list} renderItem={renders.item}/>
+      <Head title="Магазин" />
+      <ControlLayout>
+        <CurrentPage/>
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum}
+        />
+      </ControlLayout>
+      <List list={select.list} renderItem={renders.item} />
+      <Pagination
+        page={select.page}
+        totalPage={select.totalPage}
+        onHandleChangePage={callbacks.changePage}
+      />
     </PageLayout>
 
   );
