@@ -19,7 +19,8 @@ function CardProduct() {
   const select = useSelector((state) => ({
     amount: state.basket.amount,
     sum: state.basket.sum,
-    cardProduct: state.cardProduct.cardProduct
+    cardProduct: state.cardProduct.cardProduct,
+    language: state.language.language
   }));
 
   useEffect(() => {
@@ -38,20 +39,26 @@ function CardProduct() {
       () => store.actions.modals.open("basket"),
       [store]
     ),
+    languageSwitcher: useCallback(
+      () => store.actions.language.languageSwitcher(),
+      [store])
   };
 
   return (
     <PageLayout>
-      <Head title={select.cardProduct.title} />
+      <Head title={select.cardProduct.title}
+            languageSwitcher={callbacks.languageSwitcher}
+            languageSwitcherTitle={select.language.text.switchLanguage}/>
       <ControlLayout>
-        <Navbar/>
+        <Navbar language={select.language.text}/>
         <BasketTool
           onOpen={callbacks.openModalBasket}
           amount={select.amount}
           sum={select.sum}
+          language={select.language.text}
         />
       </ControlLayout>
-      <Product product={select.cardProduct} onAdd={callbacks.addToBasket} />
+      <Product product={select.cardProduct} onAdd={callbacks.addToBasket} language={select.language.text}/>
     </PageLayout>
   );
 }

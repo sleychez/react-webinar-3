@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 
-function Navbar() {
+function Navbar({language}) {
 
   return (
     <div className="Navbar">
       <Link to="/" className="Navbar-mainLink">
-        Главная
+        {language?.mainPage}
       </Link>
     </div>
   );

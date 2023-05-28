@@ -21,4 +21,7 @@
 
 .Product-button {
     align-self: flex-start;
+    cursor: pointer;
+    width: 76px;
+    height: 21px;
 }
