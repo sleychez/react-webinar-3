@@ -8,7 +8,7 @@ import useSelector from "../../store/use-selector";
 import { useParams } from "react-router-dom";
 import ControlLayout from "../../components/control-layout";
 import Product from "../../components/product";
-import CurrentPage from "../../components/currentPage";
+import Navbar from "../../components/navbar";
 
 
 
@@ -44,7 +44,7 @@ function CardProduct() {
     <PageLayout>
       <Head title={select.cardProduct.title} />
       <ControlLayout>
-        <CurrentPage/>
+        <Navbar/>
         <BasketTool
           onOpen={callbacks.openModalBasket}
           amount={select.amount}

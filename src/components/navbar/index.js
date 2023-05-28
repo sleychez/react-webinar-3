@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 
-function CurrentPage() {
+function Navbar() {
 
   return (
-    <div className="CurrentPage">
-      <Link to="/" className="CurrentPage-mainLink">
+    <div className="Navbar">
+      <Link to="/" className="Navbar-mainLink">
         Главная
       </Link>
     </div>
@@ -15,4 +15,4 @@ function CurrentPage() {
 }
 
 
-export default memo(CurrentPage);
+export default memo(Navbar);

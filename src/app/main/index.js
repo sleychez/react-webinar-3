@@ -8,7 +8,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ControlLayout from "../../components/control-layout";
 import Pagination from "../../components/pagination";
-import CurrentPage from "../../components/currentPage";
+import Navbar from "../../components/navbar";
 
 function Main() {
 
@@ -46,7 +46,7 @@ function Main() {
     <PageLayout>
       <Head title="Магазин" />
       <ControlLayout>
-        <CurrentPage/>
+        <Navbar/>
         <BasketTool
           onOpen={callbacks.openModalBasket}
           amount={select.amount}
