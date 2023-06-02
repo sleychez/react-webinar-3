@@ -30,13 +30,13 @@ function CatalogFilter() {
 
   const categoryList = createCategoryList(select.categories);
 
-  function getCategoryListArray(connection, level = 0, arr = [{ value: "", title: "Все" }]) {
-    const indent = "- ".repeat(level * 1);
+  function getCategoryListArray(connection, depth = 0, arr = [{value: "", title: "Все"}]) {
+    const indent = "- ".repeat(depth * 1);
     for (let key in connection) {
       if (connection.hasOwnProperty(key) && connection[key].id !== undefined) {
-        arr.push({ value: connection[key].id, title: indent + key });
+        arr.push({value: connection[key].id, title: indent + key});
         if (typeof connection[key] === "object" && connection[key] !== null) {
-          getCategoryListArray(connection[key], level + 1, arr);
+          getCategoryListArray(connection[key], depth + 1, arr);
         }
       }
     }

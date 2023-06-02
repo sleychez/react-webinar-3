@@ -15,8 +15,18 @@
     "one": "article",
     "other": "articles"
   },
-  "card.madeIn": "Country of origin",
+  "card.madeIn": "Manufacturer country",
   "card.category": "Category",
   "card.edition": "Year of release",
-  "card.price": "Price"
+  "card.price": "Price",
+  "auth.login": "Login",
+  "auth.logout": "Logout",
+  "profile.title": "Profile",
+  "profile.name": "Name",
+  "profile.phone": "Phone",
+  "profile.email": "email",
+  "loginForm.title": "Sign in",
+  "loginForm.signIn": "Sign in",
+  "loginForm.login": "Login",
+  "loginForm.password": "Password"
 }
