@@ -49,3 +49,17 @@ export function createCategoryList(categories, parent = null, visited = new Set(
     });
   return connection;
 }
+
+export function isValidToken(token) {
+  if (token.length !== 64) {
+    return false;
+  }
+  if (typeof token !== "string") {
+    return false;
+  }
+  const regex = /^[0-9a-fA-F]+$/
+  if (!regex.test(token)) {
+    return false;
+  }
+  return true;
+}

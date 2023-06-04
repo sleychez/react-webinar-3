@@ -8,8 +8,14 @@ class LoginState extends StoreModule {
       error: null,
       waiting: false,
       isLogin: false,
-      date: null
+      userName: null
     };
+  }
+  resetError() {
+    this.setState({
+      ...this.getState(),
+      error: null
+    });
   }
 
   async login(login, password) {
@@ -37,11 +43,11 @@ class LoginState extends StoreModule {
           ...this.getState(),
           isLogin: true,
           waiting: false,
-          data: user,
+          userName: user?.profile?.name
         });
       } else {
         this.setState({
-          data: null,
+          userName: null,
           waiting: false,
           error: json.error?.data?.issues
             ?.map(error => error.message)
@@ -82,14 +88,21 @@ class LoginState extends StoreModule {
     }
   }
 
-  async getUser() {
+  async isAuth() {
     this.setState({
       ...this.getState(),
       waiting: true
     });
     const token = localStorage.getItem("token");
+    if (!isValidToken(token)) {
+      localStorage.removeItem("token");
+      this.setState({
+        ...this.getState(),
+        waiting: false
+      });
+      return;
+    }
     if (token) {
-      try {
         const response = await fetch("/api/v1/users/self", {
           method: "GET",
           headers: {
@@ -100,18 +113,12 @@ class LoginState extends StoreModule {
         const json = await response.json();
         this.setState({
           ...this.getState(),
-          data: json.result,
+          userName: json.result?.profile?.name,
           waiting: false,
           isLogin: true
         });
-      } catch (e) {
-        this.setState({
-          data: null,
-          waiting: false
-        });
       }
     }
-  }
 }
 
 export default LoginState;

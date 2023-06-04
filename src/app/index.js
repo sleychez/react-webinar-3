@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
+import { useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import Main from "./main";
@@ -19,7 +19,7 @@ function App() {
   const activeModal = useSelector(state => state.modals.name);
 
   useEffect(() => {
-    store.actions.login.getUser();
+    store.actions.login.isAuth();
   }, []);
 
   return (

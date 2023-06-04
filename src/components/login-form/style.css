@@ -15,12 +15,15 @@
 
 .LoginForm-label {
     display: flex;
+    justify-content: flex-start;
+    width: 203px;
     flex-direction: column;
     gap: 1px;
     margin-bottom: 20px;
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
+
 }
 
 .LoginForm-input {

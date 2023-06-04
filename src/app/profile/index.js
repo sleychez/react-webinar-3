@@ -1,4 +1,4 @@
-import { memo} from "react";
+import {memo, useEffect} from "react";
 import useTranslate from "../../hooks/use-translate";
 import useSelector from "../../hooks/use-selector";
 import Navigation from "../../containers/navigation";
@@ -7,19 +7,30 @@ import Head from "../../components/head";
 import LocaleSelect from "../../containers/locale-select";
 import Auth from "../../containers/auth";
 import ProfileInfo from "../../components/profile-info";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
+import useStore from "../../hooks/use-store";
 
 function Profile() {
-  const { t } = useTranslate();
+
+  const store = useStore();
+  const {t} = useTranslate();
+  const navigate = useNavigate();
+
+
 
   const select = useSelector((state) => ({
-    user: state.login.data,
+    user: state.profile.user,
     isLogin: state.login.isLogin
   }));
 
-  if (!select.isLogin) {
-    return <Navigate to="/login"/>;
-  }
+  useEffect(() => {
+    if (!select.isLogin) {
+      navigate("/login");
+    } else {
+      store.actions.profile.getUser();
+    }
+  }, [select.isLogin]);
+
 
 
   return (

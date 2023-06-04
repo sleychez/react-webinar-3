@@ -28,6 +28,10 @@ function Login() {
       (login, password) => store.actions.login.login(login, password),
       [store]
     ),
+    onResetError: useCallback(
+      () => store.actions.login.resetError(),
+      []
+    )
   };
 
   const [data, setData] = useState({
@@ -40,6 +44,12 @@ function Login() {
       navigate("/profile");
     }
   }, [select.isLogin]);
+
+  useEffect(() => {
+    if (select.error) {
+      callbacks.onResetError();
+    }
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
