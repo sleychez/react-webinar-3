@@ -9,6 +9,8 @@ import Auth from "../../containers/auth";
 import ProfileInfo from "../../components/profile-info";
 import {Navigate, useNavigate} from "react-router-dom";
 import useStore from "../../hooks/use-store";
+import Spinner from "../../components/spinner";
+import useInit from "../../hooks/use-init";
 
 function Profile() {
 
@@ -20,18 +22,17 @@ function Profile() {
 
   const select = useSelector((state) => ({
     user: state.profile.user,
-    isLogin: state.login.isLogin
+    isLogin: state.login.isLogin,
+    waiting: state.profile.waiting
   }));
 
+  useInit(async () => {
+    await store.actions.profile.getUser()
+  }, [])
+
   useEffect(() => {
-    if (!select.isLogin) {
-      navigate("/login");
-    } else {
-      store.actions.profile.getUser();
-    }
+    if (!select.isLogin) navigate("/login");
   }, [select.isLogin]);
-
-
 
   return (
     <PageLayout>
@@ -40,7 +41,9 @@ function Profile() {
         <LocaleSelect/>
       </Head>
       <Navigation/>
-      <ProfileInfo user={select.user} t={t}/>
+      <Spinner active={select.waiting}>
+        <ProfileInfo user={select.user} t={t} />
+      </Spinner>
     </PageLayout>
   );
 }

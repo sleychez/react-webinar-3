@@ -1,4 +1,3 @@
-import { useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import Main from "./main";
@@ -7,6 +6,7 @@ import Article from "./article";
 import useStore from "../hooks/use-store";
 import Login from "./login";
 import Profile from "./profile";
+import useInit from "../hooks/use-init";
 
 /**
  * Приложение
@@ -18,8 +18,8 @@ function App() {
 
   const activeModal = useSelector(state => state.modals.name);
 
-  useEffect(() => {
-    store.actions.login.isAuth();
+  useInit(async () => {
+    await store.actions.login.isAuth();
   }, []);
 
   return (
